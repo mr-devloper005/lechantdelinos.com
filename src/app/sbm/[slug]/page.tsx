@@ -3,5 +3,4 @@ import SocialBookmarkingDetailPage, { generateMetadata as generateSbmMetadata } 
 export const revalidate = 3
 export const dynamic = 'force-dynamic'
 export const generateMetadata = generateSbmMetadata
-export const generateStaticParams = generateSbmStaticParams
 export default SocialBookmarkingDetailPage

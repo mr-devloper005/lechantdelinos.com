@@ -3,5 +3,4 @@ import PdfDetailPage, { generateMetadata as generatePdfMetadata } from '@/editab
 export const revalidate = 3
 export const dynamic = 'force-dynamic'
 export const generateMetadata = generatePdfMetadata
-export const generateStaticParams = generatePdfStaticParams
 export default PdfDetailPage
