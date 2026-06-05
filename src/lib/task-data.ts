@@ -11,7 +11,8 @@ const getPostType = (post: SitePost) => {
   const explicit = typeof (content as any).type === "string" ? String((content as any).type) : "";
   if (explicit) return explicit;
   if (Array.isArray(post.tags)) {
-    const tag = post.tags.find((item) => typeof item === "string");
+    const knownTypes = new Set(SITE_CONFIG.tasks.flatMap((task) => [task.key, task.contentType]));
+    const tag = post.tags.find((item) => typeof item === "string" && knownTypes.has(item as TaskKey));
     if (tag) return tag;
   }
   return "";
