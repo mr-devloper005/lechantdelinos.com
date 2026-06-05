@@ -234,6 +234,13 @@ export const fetchTaskPostBySlug = async (task: TaskKey, slug: string) => {
     const freshFeed = await fetchSiteFeed(1000, { fresh: true, task: type });
     const freshMatch = resolveFromFeed(freshFeed);
     if (freshMatch) return freshMatch;
+
+    // Some legacy AI-posting records are present in the public site feed but do not expose
+    // task/type metadata, so task-scoped endpoints can miss them. Use exact slug as the
+    // final source of truth before returning 404.
+    const unscopedFeed = await fetchSiteFeed(1000, { fresh: true });
+    const unscopedMatch = resolveFromFeed(unscopedFeed);
+    if (unscopedMatch) return unscopedMatch;
   } catch {
     // fall through to optional mock data
   }
