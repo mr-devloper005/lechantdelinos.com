@@ -11,7 +11,8 @@ import { buildPostMetadata, buildTaskMetadata } from "@/lib/seo";
 import { fetchTaskPostBySlug, fetchTaskPosts } from "@/lib/task-data";
 import { SITE_CONFIG } from "@/lib/site-config";
 
-export const revalidate = 3;
+export const revalidate = 3
+export const dynamic = 'force-dynamic';
 
 const escapeHtml = (value: string) =>
   value

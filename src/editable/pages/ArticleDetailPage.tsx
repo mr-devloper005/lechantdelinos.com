@@ -3,6 +3,7 @@ import { fetchTaskPostBySlug } from '@/lib/task-data'
 import { EditableArticleDetailShell } from '@/editable/sections/ArticleSections'
 
 export const revalidate = 3
+export const dynamic = 'force-dynamic'
 
 export async function generateStaticParams() {
   return []
