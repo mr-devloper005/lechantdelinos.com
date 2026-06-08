@@ -116,10 +116,20 @@ export const fetchPaginatedTaskPosts = async (
       timeoutMs: 5000,
     });
     const posts = pickTaskPosts(feed);
-    return {
-      posts,
-      pagination: feed?.pagination || fallbackPagination(page, limit, page === 1 ? posts.length : (page - 1) * limit + posts.length),
-    };
+    if (posts.length || category) {
+      return {
+        posts,
+        pagination: feed?.pagination || fallbackPagination(page, limit, page === 1 ? posts.length : (page - 1) * limit + posts.length),
+      };
+    }
+
+    // Some older public feeds are cached without the task query shape. Keep task pages useful
+    // by falling back to the full site feed and filtering locally before returning empty UI.
+    const unscopedFeed = await fetchSiteFeed(1000, { fresh: true, timeoutMs: 5000 });
+    const allTaskPosts = pickTaskPosts(unscopedFeed);
+    const start = (page - 1) * limit;
+    const pagedPosts = allTaskPosts.slice(start, start + limit);
+    return { posts: pagedPosts, pagination: fallbackPagination(page, limit, allTaskPosts.length) };
   } catch {
     return { posts: [], pagination: fallbackPagination(page, limit, 0) };
   }

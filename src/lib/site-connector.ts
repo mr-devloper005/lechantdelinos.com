@@ -86,7 +86,6 @@ async function fetchPublicJson<T>(path: string, options?: { fresh?: boolean; tim
         : undefined;
     const response = await fetch(target, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
       signal,
       ...(options?.fresh ? { cache: "no-store" } : { next: { revalidate: FEED_REVALIDATE_SECONDS } }),
     });
