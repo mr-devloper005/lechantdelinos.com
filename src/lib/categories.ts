@@ -1,4 +1,6 @@
 export const CATEGORY_OPTIONS: Array<{ name: string; slug: string }> = [
+  { name: "Uncategorised", slug: "uncategorised" },
+  { name: "Uncategorized", slug: "uncategorized" },
   { name: "Business", slug: "business" },
   { name: "Health", slug: "health" },
   { name: "Technology", slug: "technology" },
@@ -40,6 +42,9 @@ export const CATEGORY_OPTIONS: Array<{ name: string; slug: string }> = [
 const allowed = new Set(
   CATEGORY_OPTIONS.flatMap((item) => [item.slug.toLowerCase(), item.name.toLowerCase()])
 );
+
+allowed.add("uncategorised");
+allowed.add("uncategorized");
 
 export const isValidCategory = (value: string) =>
   allowed.has(value.trim().toLowerCase());
