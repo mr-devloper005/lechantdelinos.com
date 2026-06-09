@@ -17,7 +17,6 @@ describe('master panel public connector', () => {
     const fetchMock = jest.fn().mockResolvedValue(
       new Response(JSON.stringify({ success: true, data: { site: { id: 'site-1', code: 'demo', name: 'Demo Site' } } }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
       }),
     )
     global.fetch = fetchMock
@@ -36,7 +35,6 @@ describe('master panel public connector', () => {
       'https://master.example.com/api/v1/public/demo/bootstrap',
       expect.objectContaining({
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
         next: { revalidate: 123 },
       }),
     )
@@ -46,7 +44,6 @@ describe('master panel public connector', () => {
     const fetchMock = jest.fn().mockResolvedValue(
       new Response(JSON.stringify({ success: true, data: { site: { id: '1', code: 'demo', name: 'Demo' }, posts: [] } }), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
       }),
     )
     global.fetch = fetchMock
