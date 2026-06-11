@@ -1,12 +1,12 @@
 "use client";
 
 import { Suspense } from "react";
-import { Navbar } from "@/components/shared/navbar";
+import { EditableNavbar } from "@/editable/shell/EditableNavbar";
 
 export function NavbarShell() {
   return (
     <Suspense fallback={null}>
-      <Navbar />
+      <EditableNavbar />
     </Suspense>
   );
 }
