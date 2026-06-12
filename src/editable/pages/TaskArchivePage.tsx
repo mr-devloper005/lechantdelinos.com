@@ -56,7 +56,7 @@ function pageHref(basePath: string, category: string, page: number) {
 
 const taskDeck: Record<TaskKey, { icon: typeof FileText; archiveClass: string; promise: string; badge: string }> = {
   article: { icon: FileText, archiveClass: 'grid gap-5 md:grid-cols-2 xl:grid-cols-3', promise: 'Readable editorial cards with room for headlines and excerpts.', badge: 'Read' },
-  listing: { icon: Building2, archiveClass: 'grid gap-5 xl:grid-cols-2', promise: 'Directory cards highlight company identity, location, contacts, and service details.', badge: 'Business' },
+  listing: { icon: Building2, archiveClass: 'grid gap-5 md:grid-cols-2 xl:grid-cols-3', promise: 'Directory cards highlight company identity, location, contacts, and service details.', badge: 'Business' },
   classified: { icon: Megaphone, archiveClass: 'grid gap-5 xl:grid-cols-2', promise: 'Offer-board cards prioritize price, location, condition, and quick action.', badge: 'Offer' },
   image: { icon: Camera, archiveClass: 'columns-1 gap-5 space-y-5 md:columns-2 xl:columns-3', promise: 'Gallery-first browsing with strong visuals and compact captions.', badge: 'Gallery' },
   sbm: { icon: Bookmark, archiveClass: 'grid gap-4 md:grid-cols-2 xl:grid-cols-3', promise: 'Bookmark cards stay mostly text-based so saved resources scan quickly.', badge: 'Bookmark' },
@@ -89,31 +89,31 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
   const label = taskConfig?.label || task
   const deck = taskDeck[task]
   const Icon = deck.icon
-  const archiveVars = { '--archive-bg': preset.colors.background, '--archive-text': preset.colors.foreground, '--archive-surface': preset.colors.surface, '--archive-accent': preset.colors.accent } as CSSProperties
+  const archiveVars = { '--archive-bg': '#f7faf8', '--archive-text': '#092f2c', '--archive-surface': '#ffffff', '--archive-accent': '#f36c4f' } as CSSProperties
   const categoryLabel = category === 'all' ? 'All categories' : CATEGORY_OPTIONS.find((item) => item.slug === category)?.name || category
 
   return (
     <EditableSiteShell>
       <main style={archiveVars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
-        <section className="mx-auto grid max-w-[var(--editable-container)] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
-          <div className="rounded-[2.5rem] border border-[var(--editable-border)] bg-[var(--archive-surface)] p-7 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-[var(--archive-accent)]"><Icon className="h-4 w-4" /> {label}</div>
-            <h1 className="mt-5 max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.07em] sm:text-6xl">{voice?.headline || `Browse ${label}`}</h1>
+        <section className="mx-auto grid max-w-[var(--editable-container)] gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[1.05fr_0.6fr] lg:px-8 lg:py-14">
+          <div className="rounded-2xl border border-[var(--editable-border)] bg-[var(--archive-surface)] p-7 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-9">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-[#e1f4ec] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#0b7669]"><Icon className="h-4 w-4" /> {voice?.eyebrow || label}</div>
+            <h1 className="mt-5 max-w-3xl text-4xl font-black leading-tight tracking-tight sm:text-5xl">{voice?.headline || `Browse ${label}`}</h1>
             <p className="mt-6 max-w-2xl text-base leading-8 opacity-70">{voice?.description || SITE_CONFIG.description}</p>
-            <div className="mt-6 rounded-[1.5rem] border border-[var(--editable-border)] bg-white/55 p-4 text-sm font-bold leading-7 opacity-75">{deck.promise}</div>
+            <div className="mt-6 rounded-xl border border-[var(--editable-border)] bg-[#f7faf8] p-4 text-sm font-bold leading-7 opacity-75">{deck.promise}</div>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href={basePath} className="rounded-full bg-[var(--archive-text)] px-5 py-3 text-sm font-black text-[var(--archive-bg)]">Browse all</Link>
-              <Link href="/search" className="rounded-full border border-[var(--editable-border)] px-5 py-3 text-sm font-black">Search posts</Link>
+              <Link href="/search" className="rounded-full border border-[var(--editable-border)] px-5 py-3 text-sm font-black">Search businesses</Link>
             </div>
           </div>
 
-          <form action={basePath} className="self-end rounded-[2rem] border border-[var(--editable-border)] bg-white/70 p-5 shadow-sm backdrop-blur">
+          <form action={basePath} className="self-end rounded-2xl border border-[var(--editable-border)] bg-white p-5 shadow-sm">
             <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] opacity-55"><Filter className="h-4 w-4" /> Filter</div>
-            <select name="category" defaultValue={category} className="mt-4 h-12 w-full rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-sm font-bold outline-none">
+            <select name="category" defaultValue={category} className="mt-4 h-12 w-full rounded-xl border border-[var(--editable-border)] bg-white px-4 text-sm font-bold text-[#092f2c] outline-none">
               <option value="all">All categories</option>
               {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
             </select>
-            <button className="mt-3 h-12 w-full rounded-2xl bg-[var(--archive-text)] text-sm font-black text-[var(--archive-bg)]">Apply</button>
+            <button className="mt-3 h-12 w-full rounded-xl bg-[#0b1d2e] text-sm font-black text-white">Apply</button>
             <p className="mt-3 text-xs font-bold opacity-55">Showing: {categoryLabel}</p>
           </form>
         </section>
@@ -177,21 +177,21 @@ function ListingArchiveCard({ post, href }: { post: SitePost; href: string }) {
   const phone = getField(post, ['phone', 'telephone', 'mobile'])
   const website = getField(post, ['website', 'url'])
   return (
-    <Link href={href} className="group grid gap-5 rounded-[2rem] border border-[var(--editable-border)] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:grid-cols-[120px_1fr]">
-      <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-[1.5rem] bg-[var(--archive-bg)] ring-1 ring-[var(--editable-border)]">
-        {logo ? <img src={logo} alt="" className="h-full w-full object-cover" /> : <BriefcaseBusiness className="h-10 w-10 opacity-45" />}
+    <Link href={href} className="group overflow-hidden rounded-lg border border-[var(--editable-border)] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#e1f4ec]">
+        {logo ? <img src={logo} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /> : <div className="flex h-full w-full items-center justify-center"><BriefcaseBusiness className="h-12 w-12 opacity-45" /></div>}
+        <span className="absolute left-3 top-3 rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-[#0b7669] shadow-sm">Business</span>
+        {location ? <span className="absolute bottom-3 left-3 right-3 inline-flex max-w-fit items-center gap-1 rounded-full bg-[#0b1d2e]/86 px-3 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-white backdrop-blur"><MapPin className="h-3 w-3" /> {location}</span> : null}
       </div>
-      <div className="min-w-0">
-        <div className="flex flex-wrap gap-2">
-          <span className="rounded-full bg-[var(--archive-text)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--archive-bg)]">Directory</span>
-          {location ? <span className="inline-flex items-center gap-1 rounded-full border border-[var(--editable-border)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]"><MapPin className="h-3 w-3" /> {location}</span> : null}
-        </div>
-        <h2 className="mt-4 text-2xl font-black leading-tight tracking-[-0.05em]">{post.title}</h2>
+      <div className="p-5">
+        <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[#0b7669]">{getCategory(post, 'Local service')}</p>
+        <h2 className="mt-3 line-clamp-2 text-xl font-black leading-tight tracking-tight">{post.title}</h2>
         <p className="mt-3 line-clamp-2 text-sm leading-6 opacity-65">{getSummary(post)}</p>
-        <div className="mt-4 grid gap-2 text-xs font-bold opacity-70 sm:grid-cols-2">
-          {phone ? <span>Phone: {phone}</span> : null}
-          {website ? <span>Website available</span> : null}
+        <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-black">
+          {phone ? <span className="rounded-full bg-[#fff8df] px-3 py-1">Phone listed</span> : null}
+          {website ? <span className="rounded-full bg-[#d7f4ec] px-3 py-1">Website</span> : null}
         </div>
+        <span className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#0b1d2e] px-4 py-3 text-sm font-black text-white">View details <ArrowRight className="h-4 w-4" /></span>
       </div>
     </Link>
   )
