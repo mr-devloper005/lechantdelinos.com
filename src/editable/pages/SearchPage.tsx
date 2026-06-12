@@ -87,40 +87,40 @@ export default async function SearchPage({ searchParams }: { searchParams?: Prom
 
   return (
     <EditableSiteShell>
-      <main className="min-h-screen bg-[var(--editable-page-bg,#fff7ee)] text-[var(--editable-page-text,#2f1d16)]">
-        <section className="mx-auto max-w-[var(--editable-container)] px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-          <div className="grid gap-8 rounded-[2.5rem] border border-[var(--editable-border)] bg-white/70 p-6 shadow-[0_30px_90px_rgba(15,23,42,0.08)] backdrop-blur md:grid-cols-[0.8fr_1.2fr] lg:p-10">
+      <main className="min-h-screen bg-[var(--editable-page-bg,#f4fbf7)] text-[var(--editable-page-text,#092f2c)]">
+        <section className="mx-auto max-w-[var(--editable-container)] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="grid gap-8 rounded-2xl border border-[var(--editable-border)] bg-white p-6 shadow-[0_30px_90px_rgba(15,23,42,0.08)] md:grid-cols-[0.8fr_1.2fr] lg:p-10">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.28em] opacity-55">{pagesContent.search.hero.badge}</p>
-              <h1 className="mt-5 text-5xl font-black leading-[0.92] tracking-[-0.08em] sm:text-7xl">{pagesContent.search.hero.title}</h1>
+              <p className="inline-flex rounded-full bg-[#d7f4ec] px-4 py-2 text-xs font-black uppercase tracking-[0.16em] text-[#0b7669]">{pagesContent.search.hero.badge}</p>
+              <h1 className="mt-5 text-4xl font-black leading-tight tracking-tight sm:text-5xl">{pagesContent.search.hero.title}</h1>
               <p className="mt-6 max-w-xl text-base font-semibold leading-8 opacity-70">{pagesContent.search.hero.description}</p>
             </div>
-            <form action="/search" className="self-end rounded-[2rem] border border-[var(--editable-border)] bg-[var(--editable-page-bg,#fff7ee)] p-4 sm:p-5">
+            <form action="/search" className="self-end rounded-2xl border border-[var(--editable-border)] bg-[#f7faf8] p-4 sm:p-5">
               <input type="hidden" name="master" value="1" />
               <label className="flex items-center gap-3 rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3">
                 <Search className="h-5 w-5 opacity-45" />
-                <input name="q" defaultValue={query} placeholder={pagesContent.search.hero.placeholder} className="min-w-0 flex-1 bg-transparent text-base font-bold outline-none placeholder:text-current/35" />
+                <input name="q" defaultValue={query} placeholder={pagesContent.search.hero.placeholder} className="min-w-0 flex-1 bg-transparent text-base font-bold text-[#092f2c] outline-none placeholder:text-[#6f8580]" />
               </label>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <label className="flex items-center gap-2 rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3">
                   <Filter className="h-4 w-4 opacity-45" />
-                  <input name="category" defaultValue={category} placeholder="Category" className="min-w-0 flex-1 bg-transparent text-sm font-bold outline-none placeholder:text-current/35" />
+                  <input name="category" defaultValue={category} placeholder="Category" className="min-w-0 flex-1 bg-transparent text-sm font-bold text-[#092f2c] outline-none placeholder:text-[#6f8580]" />
                 </label>
-                <select name="task" defaultValue={task} className="rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3 text-sm font-black outline-none">
+                <select name="task" defaultValue={task} className="rounded-2xl border border-[var(--editable-border)] bg-white px-4 py-3 text-sm font-black text-[#092f2c] outline-none">
                   <option value="">All content types</option>
                   {enabledTasks.map((item) => <option key={item.key} value={item.key}>{item.label}</option>)}
                 </select>
               </div>
-              <button className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-[var(--editable-page-text,#2f1d16)] px-6 text-sm font-black uppercase tracking-[0.18em] text-[var(--editable-page-bg,#fff7ee)] transition hover:-translate-y-0.5" type="submit">Search</button>
+              <button className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#0b1d2e] px-6 text-sm font-black uppercase tracking-[0.12em] text-white transition hover:-translate-y-0.5" type="submit">Search</button>
             </form>
           </div>
 
           <div className="mt-10 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.24em] opacity-50">{results.length} results</p>
-              <h2 className="mt-2 text-3xl font-black tracking-[-0.06em]">{query ? `Results for “${query}”` : pagesContent.search.resultsTitle}</h2>
+              <h2 className="mt-2 text-3xl font-black tracking-tight">{query ? `Results for "${query}"` : pagesContent.search.resultsTitle}</h2>
             </div>
-            <Link href="/article" className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Browse latest <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/listing" className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Browse listings <ArrowRight className="h-4 w-4" /></Link>
           </div>
 
           {results.length ? (
