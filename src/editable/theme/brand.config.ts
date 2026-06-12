@@ -18,6 +18,6 @@ export const slot4BrandConfig = {
       : productKind === 'editorial'
         ? { primary: '#241711', surface: '#fbf6ee' }
         : productKind === 'directory'
-          ? { primary: '#0f172a', surface: '#f8fbff' }
+          ? { primary: '#0b7669', surface: '#f4fbf7' }
           : { primary: '#5b2b3b', surface: '#f7f1ea' },
 } as const
